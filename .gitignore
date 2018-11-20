@@ -1,0 +1,17 @@
+# (L'idéal est de mettre ces motifs dans ~/.config/git/ignore)
+
+# Emacs
+*~
+\#*#
+.*
+Desktop/
+Documents/
+Downloads/
+GPUCache/
+Pictures/
+mozilla.pdf
+projet1.git/
+snap/
+
+# Vi
+.*.swp
