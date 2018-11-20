@@ -1,0 +1,42 @@
+
+
+spec : eigenvalues of matrices and pencils ( les valeurs propres)
+	ex : a = eye(3,3)
+	     spec(a) -> 1
+			1
+			1	
+
+Pour la matrice identité : eye(x,y) ( trouvée avec : apropos identity)
+
+
+qst 2 :
+
+size(M) : donne la taille de la matrice (lignes,colonnes)
+s =size(M) : nblignes = s(1) , nbcol = s(2)
+
+niéme ligne : A(n,:)
+niéme colonne : A(,n)
+
+elt à l,c : A(l,c)
+
+matrice diagonal : diag(A)
+partie triangulair inf et sup : tril(A) - triu(A)
+
+qst3 : 
+
+1 - identité avec diag et ones : diag(diag(ones(x,y))
+2 - 	a = eye(10,10) * 2	
+	b = diag(diag(ones(9,9) * -1))
+	c = diag(diag(ones(10,10) * 1,1),-1)
+	a+b+c
+
+1.4-fonction
+
+qst1:
+
+DISCRETISATION :
+
+x = 0:0.1:1 -> correspond à une discrétisation par pas de 0.1, de l’intervalle [0, 1], soit 11 valeurs ( 0 , 0.1 , 0.2 ... 1) _ pour cos et sin on a pas besoin de boucle , ils agissent terme à terme sur les vecteurs
+
+pour plot : il faut executer scilab avec : LIBGL_ALWAYS_SOFTWARE=1 scilab &
+

@@ -1,0 +1,597 @@
+\documentclass[a4paper,11pt]{article}
+
+%\usepackage[utf8x]{inputenc}
+\usepackage[applemac]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{fullpage}
+\usepackage{xspace}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{url}
+
+\lstset{basicstyle=\small\tt,
+  keywordstyle=\bfseries\color{Orchid},
+  stringstyle=\it\color{Tan},
+  commentstyle=\it\color{LimeGreen},
+  showstringspaces=false}
+
+\newtheorem{question}{Question}
+\newtheorem{exo}{Exercice}
+
+\newcommand{\dx}{\,dx}
+\newcommand{\ito}{,\dotsc,}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Poly}[1]{\mathcal{P}_{#1}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\pars}[1]{\left(#1\right)}
+\newcommand{\bigpars}[1]{\bigl(#1\bigr)}
+\newcommand{\set}[1]{\left\{#1\right\}}
+
+\title{Stage Analyse pour l'ingénieur Ensimag 1A \\
+  Mini-stage Scilab/Latex}
+\author{Brigitte Bidegaray \and Samah Bouzidi \and Simon Pageaud \and Valérie Perrier}
+\date{Novembre 2018}
+
+% ===============
+\begin{document}
+% ===============
+\maketitle
+ 
+\noindent Les objectifs de ce mini-stage sont les suivants:
+\begin{enumerate}
+\item Acquérir la maîtrise de {\bf Scilab}, qui est un outil de calcul
+  numérique.
+\item Acquérir la maîtrise de {\bf \LaTeX}, qui est un outil de
+  traitement de texte, utilisé par les scientifiques (utile notamment
+  pour les formules mathématiques).
+\item Apprendre à rédiger un compte-rendu de TP, à partir de quelques
+  exercices.
+\end{enumerate}
+Tous les documents pour ce TP sont disponibles sur Chamilo
+ dans le dossier :\\
+\begin{center}
+ENSIMAG3MMAI/Documents/TP Scilab-Latex
+\end{center}
+
+La partie 1 de ce sujet vous propose une introduction rapide à
+Scilab. Prenez le temps de répondre aux questions et de feuilleter le
+polycopié. Familiarisez-vous ensuite à \LaTeX\ avec la
+partie 2, le polycopié et le fichier exemple fourni enonce-TP-2018.tex. Enfin, faites les
+exercices de la partie TP, que vous rédigerez dans un compte-rendu.
+Consignes pour le compte-rendu:
+\begin{itemize}
+\item Travailler en binôme.
+\item Rendre une archive .tar.gz par Teide, et contenant le
+  compte-rendu au format pdf ainsi que le code au format sce. Votre
+  compte-rendu donnera lieu à un bonus/malus pour la note d'analyse.
+\item Ne pas mettre le code dans le compte-rendu.
+\item être concis: quelques pages doivent suffire!
+\item Se relire, soigner les figures et les formules.
+\item[]
+\end{itemize}
+\begin{center}
+\textbf{Date limite de rendu: 3 décembre 2018}\\
+\end{center}
+
+Bon courage à tous, et n'hésitez pas à faire appel aux encadrants
+aussi souvent que nécessaire!
+
+
+%======================================
+\section{Prise en main de Scilab }
+%======================================
+
+\subsection{Introduction}
+
+Pour lancer le logiciel Scilab il faut taper dans un terminal \verb+scilab &+. Une fenêtre de commandes
+s'ouvre.  Après avoir lancé Scilab, vous pouvez tester les commandes
+suivantes:
+\begin{itemize}
+\item \verb+help+ pour ouvrir l'aide en Scilab,
+\item \verb+help mot-clé+ pour obtenir la description de la fonction
+    \verb+mot-clé+,
+\item \verb+apropos mot-clé+ pour obtenir la liste des pages d'aide
+    contenant \verb+mot-clé+,
+\item \verb+quit+ pour sortir de Scilab.
+\end{itemize}
+
+\begin{question} Donner la description de la commande {\tt spec}.
+  Trouver la commande Scilab qui permet de définir la matrice identité.
+\end{question}
+
+Les commandes \verb+clear+, \verb+clc+ et \verb+clf+ permettent
+d'effacer respectivement les données mises en mémoire, l'écran de
+commandes et les figures. Elles doivent être exécutées régulièrement
+pour éviter les erreurs et libérer la mémoire.
+
+\subsection{Exécuter sous Scilab}
+
+Les commandes Scilab peuvent être tapées directement en ligne, par
+exemple:
+\begin{verbatim}
+--> A = ones(3,4)
+\end{verbatim}
+ou bien, écrites dans un fichier de commandes ``{\tt *.sce}''. Nous
+vous conseillons d'utiliser un éditeur de texte qui offre la
+coloration syntaxique pour le language Scilab; par exemple, {\it
+  SciNotes}, accessible depuis le menu ``applications'' de
+Scilab. Pour cela,
+\begin{enumerate}
+\item ouvrir un fichier intitulé par exemple {\tt test.sce},
+  comportant les lignes suivantes:
+  \begin{lstlisting}[language=scilab]
+    // Ceci est un commentaire
+    clc; clf; clear;
+    A = ones(3, 4)
+  \end{lstlisting}
+\item sous Scilab, taper:
+\begin{verbatim}
+--> exec("test.sce")
+\end{verbatim}
+\end{enumerate}
+
+Si l'on veut définir une fonction, par exemple la fonction {\it carré},
+on peut le faire soit dans notre script {\tt tests.sce}, soit dans un
+autre fichier, par exemple {\tt carre.sce}:
+\begin{enumerate}
+\item Ouvrir un fichier intitulé par exemple {\tt carre.sce},
+  comportant les instructions suivantes:
+  \begin{lstlisting}[language=scilab]
+    //Fonction carre
+    function d = carre(x)
+       d = x .* x
+    endfunction
+  \end{lstlisting}
+
+\item Sous Scilab, charger le fichier {\tt carre.sce}:
+\begin{verbatim}
+--> exec("carre.sce")
+\end{verbatim}
+\end{enumerate}
+La fonction {\it carré} est maintenant définie sous Scilab:
+\begin{verbatim}
+--> x = [0, 1, 2, 3, 4]
+--> carre(x)
+\end{verbatim}
+
+\subsection{Vecteurs et matrices}
+
+Scilab est un logiciel de calcul \emph{numérique}, l'essentiel des objets que l'on manipule sont des matrices de nombres.
+
+La façon la plus simple de définir une matrice $n \times m$ en Scilab
+est d'entrer au clavier la liste de ses éléments, par exemple
+\begin{verbatim}
+--> A = [a11, a12, a13; a21, a22, a23]
+\end{verbatim}
+
+\paragraph{Opérations élémentaires} A tester sur des exemples!
+\begin{verbatim}
+--> A(k,:)  // k-ième ligne de la matrice A
+--> A + B   // somme
+--> A * B   // produit
+--> A .* B  // produit terme à terme
+--> A^2     // équivalent à A * A
+--> A.^2    // équivalent à A .* A
+--> det(A)  // déterminant de A
+--> A'      // transposée de A
+--> inv(A)  // inverse de A
+\end{verbatim}
+
+\begin{question} Entrer sous Scilab la matrice:
+  \begin{equation*}
+    A = \left( \begin{array}{cccc}
+      1 & 0 & 3 & 1 \\
+      1 & 2 & 0 & 1 \\
+      0 & 1 & 3 & 0
+    \end{array} \right).
+  \end{equation*}
+  \begin{enumerate}
+  \item Quelle est la commande donnant la taille de la matrice A ?
+  \item Extraire la première ligne, la dernière colonne et l'élément à
+    la deuxième ligne, troisième colonne de $A$.
+  \item Extraire la diagonale, les parties triangulaires supérieures et
+    inférieures de $A$.
+  \end{enumerate}
+\end{question}
+
+\begin{question}[Matrices particulières]~
+  \begin{enumerate}
+  \item En utilisant les fonctions {\tt ones} et {\tt diag}, définir la
+    matrice identité $10\times 10$.
+  \item Définir la matrice tridiagonale d'ordre $10$ suivante en utilisant ces
+    commandes:
+    \begin{equation*}
+      C = \left(\begin{array}{cccc}
+          2 & -1& & \mathbf{0}\\
+          1 & 2 & \ddots & \\
+          & \ddots & \ddots &-1\\
+          \mathbf{0}& & 1 &2 \\
+        \end{array} \right).
+    \end{equation*}
+  \end{enumerate}
+\end{question}
+
+
+\subsection{Fonctions}
+
+\subsubsection{Fonctions échantillonnées (= discrétisées)}
+
+Une fonction peut être définie par rapport à une discrétisation de la
+variable $x$, ainsi:
+\begin{verbatim}
+--> x = 0:0.1:1
+\end{verbatim}
+correspond à une discrétisation par pas de 0.1, de l'intervalle
+$[0,1]$, soit 11 valeurs. On définit des fonctions sur cette grille
+discrète, par exemple:
+\begin{verbatim}
+--> y = sin(2 * %pi * x) + cos(%pi * x)  // somme de deux sinusoïdes
+--> z = x.^2                             // parabole
+\end{verbatim}
+
+\noindent {\it Remarque :} Les fonctions prédéfinies (comme {\tt cos} ou {\tt
+  sin}) agissent terme à terme sur les vecteurs, et même sur les
+matrices. Ainsi on n'a pas besoin de faire de boucles. En règle
+générale on évite les boucles autant que possible, car elles
+ralentissent l'exécution.
+
+\subsubsection{Tracé de courbes}
+
+Pour tracer une courbe $y=x^2$ sur l'intervalle $[a,b]$:
+\begin{verbatim}
+--> n = ...              // nombre de points de discrétisation
+--> dx = (b - a)/(n - 1) // pas de la discrétisation
+--> x = a:dx:b;          // x est échantillonné entre a et b avec un pas de dx
+--> plot(x, x.^2)
+\end{verbatim}
+{\it Remarques :}
+\begin{itemize}
+\item On pourra également utiliser la commande {\tt x=linspace(a,b,n)}
+  pour définir la grille discrète.
+\item La commande {\tt plot} est une fonction de Matlab qui a ensuite
+  été intégrée à Scilab. On peut aussi utiliser la fonction originale de
+  Scilab {\tt plot2d} décrite dans le poly.
+\end{itemize}
+~
+\begin{description}
+\item[Pour varier le trait ou la couleur] ~
+\begin{verbatim}
+--> plot(x, f(x), 'r-')
+\end{verbatim}
+  Dans la chaîne de caractère (troisième argument), on donne une
+  lettre imposant la couleur ({\tt 'r'} pour red, {\tt 'b'} pour blue,
+  {\tt 'g'} pour green...) et un symbole pour le trait ({\tt '-'} pour un
+  trait continu, {\tt '- -'} pour des tirets, {\tt ':'} pour des
+  pointillés...). Pour plus de détails, {\tt help LineSpec}.
+
+  ~
+\item[Pour tracer plusieurs courbes, rajouter un titre, des axes, une
+  légende] ~
+\begin{verbatim}
+--> x = 0:0.1:10
+--> plot(x, cos(x), 'r', x, sin(x), 'b')
+--> xtitle('Graphe de la fonction sin')  // titre
+--> legend('cos','sin')                  // légende
+--> xlabel('temps'); ylabel('f(t)');     // noms des axes
+\end{verbatim}
+
+  ~
+\item[Pour tracer plusieurs graphes dans une fenêtre] ~\\
+  La commande {\tt subplot(n, m, p)} placée avant chaque tracé de
+  courbe, subdivise la fenêtre du graphe en une matrice $n\times m$ de
+  sous-fenêtres et sélectionne la $p$-ième pour dessiner le graphe
+  courant: l'élément $(i, j)$ de la matrice correspond au graphe numéro
+  $(i-1)n + j$.
+
+  ~
+\item[Pour créer une nouvelle figure] ~\\
+  Taper {\tt figure()} par exemple pour créer une nouvelle fenêtre.
+
+  ~
+\item[Pour exporter une figure] ~\\
+  Dans la fenêtre graphique à exporter, cliquer sur le menu {\tt
+    File}, puis {\tt Export}. Dans la fenêtre qui s'ouvre alors:
+  \begin{enumerate}
+  \item choisir l'extension du fichier image: choisir de préférence {\tt pdf},
+  \item choisir entre {\tt Color} et {\tt Black \& White},
+  \item choisir l'orientation. Attention, par défaut, l'image est en
+    landscape (format paysage)!
+  \item entrer le nom du fichier image: {\tt myfig} par exemple, sans
+    l'extension.
+  \end{enumerate}
+\end{description}
+
+\newpage
+
+\begin{question} 
+  Tracer les courbes de la fonction {\it sin} sur l'intervalle
+  $[0,2\pi]$ pour 6 points de discrétisation, puis 21 points de
+  discrétisation (en une autre couleur). Ajouter un titre et une légende.
+\end{question}
+
+
+%=====================================
+\section{Prise en main de Latex}
+%=====================================
+
+Un fichier Latex est repérable par son extension ``.tex''.  Un exemple
+de fichier Latex est donné sur Chamilo dans le dossier TP Scilab-Latex.
+
+\paragraph{Editer et compiler un fichier Latex} \
+\begin{enumerate}
+\item Pour éditer et modifier ce fichier, il suffit d'utiliser votre
+  éditeur de texte préféré, par exemple :
+\begin{verbatim}
+$ emacs enonce-TP-2018.tex &
+\end{verbatim}
+\item Pour compiler ce fichier, taper la commande :
+\begin{verbatim}
+$ pdflatex enonce-TP-2018.tex
+\end{verbatim}
+\item Si la compilation s'est exécutée sans erreurs, un fichier
+  ``enonce-TP-2018.pdf'' a été créé, à visualiser par exemple avec:
+\begin{verbatim}
+$ evince enonce-TP-2018.pdf &
+\end{verbatim}
+\end{enumerate}
+{\it NB: Il est conseillé de garder la fenêtre avec le pdf active (en
+insérant un $\&$ à la fin de la commande). Après chaque modification
+puis compilation du fichier tex, le fichier pdf est mis à jour et
+rafraîchi automatiquement.}
+
+\paragraph{Structure d'un fichier Latex} \ \\
+Le langage Latex comprend deux types d'éléments (en plus du texte normal) : des commandes et des environnements.
+
+Une \textbf{commande} est identifiable par le préfixe \textbackslash , et peut comprendre des paramètres indiqués entre \textbf{\{ \}} et des options indiquées entre \textbf{[ ]}.
+
+Un \textbf{environnement} se déclare à l'aide de deux commandes {\tt \textbackslash begin} et {\tt \textbackslash end}. Le contenu compris entre ces deux balises aura une mise en forme, ou comprendra des commandes spécifiques à l'environnement.
+
+\ \\La première ligne d'un fichier Latex est toujours la déclaration de sa classe.
+
+\begin{question} Repérez la classe à laquelle appartient cet énoncé. Changez cette classe pour {\tt book} et observez les changements sur le document.
+\end{question}
+S'en suivent, dans un ordre quelconque :
+\begin{itemize}
+  \item import des packages utilisés (encodage du document, langue, environnements spécifiques...)
+  \item définition personnalisée de commandes, d'environnements
+  \item informations relatives au document : date, auteur, titre
+\end{itemize}
+Tous ces éléments donnent des informations importantes pour la compilation du fichier, mais ne vont rien afficher directement sur le document pdf généré.
+
+\paragraph{Contenu du document} \ \\
+C'est l'environnement {\tt document} qui va générer le contenu du document pdf. Dans cet environnement, en plus du texte classique, on peut intégrer (entre autre) des commandes spécifiant :
+
+\begin{itemize}
+  \item la structure de document (sections)
+  \item l'organisation et la mise en forme du texte
+  \item l'affichage et le référencement de figures (contenant par exemple des images, ou des tableaux)
+  \item du contenu spécialisé (par exemple mathématiques, chimie ou encore musique)
+\end{itemize}
+
+Certaines commandes permettent aussi de générer automatiquement un titre, une table des matières, ou une page de références bibliographique.
+
+\begin{question} Essayez d'inclure une image dans le document .tex. Pour cela on utilisera la commande {\tt \textbackslash includegraphics} dans l'environnement {\tt figure}.
+\end{question}
+
+\paragraph{Ecrire des mathématiques} \ \\
+Il existe deux principales manière d'inclure du contenu mathématique dans un document Latex : au milieu de texte, en indiquant encadrant le contenu mathématique par des balises \$, ou alors sur une ligne séparée avec l'environnement {\tt equation}.
+
+\paragraph{Mise en page}\ \\
+La mise en page du fichier se fait de manière automatique. En particulier les sections que vous aurez indiquées seront automatiquement numérotées, de même que les figures, les équations et théorèmes. Le placement des figures est aussi décidé par Latex, ce qui peut donner parfois des résultats inattendus. Deux solutions pour remédier à une figure éloignée du texte qui lui fait référence :
+\begin{itemize}
+  \item ajouter l'option {\tt [h]} ou {\tt [h!]} à la commande {\tt \textbackslash includegraphics} pour forcer la position de la figure par rapport au texte
+  \item laisser la figure se placer à un endroit différent du document, et ajouter une référence que l'on pourra citer dans le texte. Pour cela, il faut utiliser la commande {\tt \textbackslash label} dans l'environnement {\tt figure}, pour associer un mot clé à votre figure. Dans votre texte, vous pouvez faire référence à cette figure en utilisant la commande {\tt \textbackslash ref} suivie du mot clé que vous lui avez attribué. Ceci fonctionne aussi pour tout ce qui est numéroté dans la structure générale du document : sections, équations, théorèmes..
+\end{itemize}
+
+Vous pouvez maintenant passer à la partie suivante du TP, et utiliser
+le poly Latex au fur et à mesure des besoins que vous aurez.
+
+
+%===================================================
+\section{Travaux pratiques - Compte-rendu}
+%===================================================
+
+Les exercices de cette partie sont à rédiger dans le compte-rendu
+Latex. Pour vous aider dans l'écriture des formules mathématiques,
+vous pouvez récupérer le source du TP (le .tex) dans le répertoire de Chamilo.
+
+
+\subsection{Sensibilisation à l'arithmétique machine }
+
+Scilab, comme la plupart des langages de calcul, utilise la norme
+IEEE-754 pour le stockage des nombres en mémoire. Sans rentrer dans
+les détails, un nombre réel est représenté par un nombre flottant
+\begin{equation*}
+  x = 0.b_1b_2 \hdots b_m \, 10^e.
+\end{equation*}
+La partie $0.b_1b_2 \hdots b_m$ s'appelle la mantisse, $e$ est
+l'exposant. Comme la mantisse n'a qu'un nombre $m$ fixé de chiffres
+significatifs, Scilab ne pourra pas distinguer 2 réels au-delà de cette précision. A
+titre indicatif, en Scilab la mantisse est codée sur 52 bits,
+l'exposant sur 11 bits et le signe sur 1, ce qui fait qu'un réel
+occupe 64 bits (8 octets) en mémoire.
+
+En Scilab, on ne peut donc pas calculer un nombre avec une précision
+arbitraire. La constante {\tt \%eps} est la distance entre le nombre
+$1$ et le flottant machine qui lui est immédiatement supérieur : on
+l'appelle le zéro machine, il vaut $2^{-52} \approx
+2.22*10^{-16}$. Pour mieux comprendre, essayez les commandes
+suivantes:
+\begin{verbatim}
+--> format(20)
+--> 1 + %eps
+--> 1 + 0.5 * %eps
+\end{verbatim}
+
+\begin{exo} Exécuter dans Scilab les commandes suivantes. Expliquer et
+  commenter les résultats.
+\begin{verbatim}
+--> x = 1e30
+--> y = 1e-8
+--> z = ((y + x) - x) / y
+--> w = (y + (x - x)) / y
+\end{verbatim}
+\end{exo}
+
+\begin{exo} On considère la fonction $f$ définie de la manière
+  suivante : pour $x \in [0,4]$ on calcule
+  \begin{itemize}
+  \item $y = \sqrt{\sqrt{\sqrt {\dots{\sqrt{ x}}}}}$ (128 fois)
+  \item puis $f(x) = ((\dots((y^2)^2)^2\dots)^2)^2$ (128 fois)
+  \end{itemize}
+  Tracer la courbe de $f$ en fonction de $x$. Que
+  constatez-vous ? Expliquer le résultat.
+\end{exo}
+
+\begin{exo} On cherche à calculer la valeur de l'intégrale
+  \begin{equation*}
+    I_{20} = \int_0^1 x^{20} e^{x} dx
+  \end{equation*}
+  \begin{enumerate}
+  \item Donner une formule de récurrence pour calculer cette intégrale, puis évaluer $I_{20}$
+    à partir de $I_0$
+  \item Evaluer $I_{20}$ en utilisant le développement en série de $e^x$.
+  \item Conclusions ?
+  \end{enumerate}
+\end{exo}
+
+\begin{exo} Ici, on va calculer directement une approximation de
+  $I_{20}$ en utilisant la méthode des rectangles.  Ecrire une fonction
+  {\tt I = rectangle(n)} qui calcule $I_{20}$ en utilisant $n$
+  points. Vérifier que, pour $n$ suffisamment grand, on retrouve bien le
+  même résultat qu'à la question 3.2.
+\end{exo}
+
+
+\subsection{Etude du phénomène de Gibbs}
+
+Le phénomène de Gibbs est un phénomène oscillatoire qui s'observe
+graphiquement quand on approche une fonction par sa série de
+Fourier. L'exercice qui suit vous fait d'abord calculer la série de
+Fourier d'une fonction ``simple'', puis tracer cette série tronquée
+aux premiers termes.
+
+\paragraph*{Rappel sur les séries de Fourier}
+Soit $f:\mathbb{R}\mapsto\mathbb{C}$ une fonction $T$ periodique, la série
+de Fourier de $f$ s'écrit comme une combinaison linéaire de fonctions sinusoïdales :
+\begin{equation}
+	f(t) = \sum_{n=-\infty}^{\infty} c_{n}(f)\exp\left(2i\pi\frac{n}{T}t\right),
+\end{equation}
+où les coefficients $c_{n}(f)$ de $f$ sont appelés \emph{coefficients de Fourier}
+et sont définis comme suit :
+\begin{equation}
+	c_{n}(f) = \frac{1}{T}\int_{-T/2}^{T/2} f(t)\exp\left(-2i\pi\frac{n}{T}t\right)dt.
+\end{equation}
+Dans le cas de fonctions $f:\mathbb{R}\mapsto\mathbb{R}$, quelques simplifications
+peuvent être faites, la série de Fourier peut s'écrire comme suit :
+\begin{equation}
+	f(t) = a_{0}(f) + \sum_{n=1}^{\infty} \left( a_{n}(f)\cos\left(2\pi\frac{n}{T}t\right) + b_{n}(f)\sin\left(2\pi\frac{n}{T}t\right) \right),
+\end{equation}
+où les coefficients $a_{n}(f)$, sont définis comme suit :
+\begin{equation}
+	\left\{\begin{aligned}
+		a_{0}(f) &= \frac{1}{T}\int_{-T/2}^{T/2}f(t)dt \\
+		a_{n}(f) &= \frac{2}{T}\int_{-T/2}^{T/2}f(t)\cos\left(2\pi\frac{n}{T}t\right)dt \\
+		b_{n}(f) &= \frac{2}{T}\int_{-T/2}^{T/2}f(t)\sin\left(2\pi\frac{n}{T}t\right)dt \\
+	\end{aligned}\right..
+\end{equation}
+
+\begin{exo} (théorique) Soit la fonction 1-périodique $f$, définie
+  sur $[-\frac{1}{2}, \frac{1}{2}[$ par
+  \begin{equation}
+    \label{f}
+    f(x) = \left\{\begin{array}{lll}
+        -1 & \text{pour} & -\frac{1}{2} \le x \le 0 \,,\\
+        1 & \text{pour} & 0< x < \frac{1}{2} \,.
+      \end{array}\right.
+  \end{equation}
+  Calculer la série de Fourier de $f$ et expliquer en
+  quels points $x$ la formule ci-dessous est valide :
+  \begin{equation}
+    \label{Ff}
+    f(x) = \frac{4}{\pi} \sum_{n=0}^{+\infty} \frac{\sin(2(2n+1)\pi x)}{2n+1} \,.
+  \end{equation}
+\end{exo}
+
+\begin{exo} {\it (pratique)} Ecrire un programme Scilab traçant la
+  série de Fourier tronquée de la fonction $f$ (formule \eqref{f}).
+  Concrètement, reprendre la formule \eqref{Ff} et calculer la somme
+  partielle des {\tt (Ntermes+1)}-premiers termes, pour une valeur de
+  {\tt Ntermes} entrée au clavier :
+  \begin{lstlisting}[language=scilab]
+    Ntermes = input('Entrer le nombre de termes')
+  \end{lstlisting}
+  Pour la boucle de contrôle :
+  \begin{lstlisting}[language=scilab]
+    for i = 0:Ntermes
+        S = S + ...
+    end
+  \end{lstlisting}
+  Quel phénomène observez-vous sur le graphe? Comment varie-t-il avec
+  {\tt Ntermes}? Que pouvez-vous en conclure sur la convergence de la
+  série de Fourier?
+\end{exo}
+
+
+\subsection{Théorème de Gerschg\"orin}
+
+\paragraph*{(petit) Rappel sur les valeurs propres et vecteurs propres}
+Soit $A$ une matrice, les valeurs propres $\lambda$ et les vecteurs propres
+$v$ de $A$ respectent l'égalité :
+\begin{equation}
+	(A - \lambda I)v = 0,
+\end{equation}
+où $I$ est la matrice identité.
+
+
+\begin{figure}
+  \includegraphics[h!]{index.jpg}
+\end{figure}
+
+
+
+
+\begin{exo} Dans cet exercice, nous nous intéressons au théorème suivant :\\
+
+  Soit $A$ une matrice carrée d'ordre $N$. Les valeurs propres de
+  $A$ appartiennent à l'union des $N$ disques $D_k$ du plan
+  complexe, soit : $\lambda \in \bigcup\limits_{k=1}^N D_k$, où
+  $D_k$, appelé disque de Gerschg\"orin est défini par:
+  \begin{equation*}
+    D_k = \{ z \in \C : |z - a_{kk}| \leq \Lambda_k =
+    \sum\limits_{j=1,j\neq k}^N |a_{kj}| \} \,.
+  \end{equation*}
+  \begin{enumerate}
+  \item Démontrer ce théorème.
+  \item Ecrire un programme Scilab permettant de visualiser les disques
+    de Gerschg\"orin dans le plan complexe (pour tracer un cercle tracer
+    deux demi-cercles en utilisant la commande {\tt plot2d}).
+  \item Vérifier que les valeurs propres de la matrice $A$ suivante sont toutes
+  dans l'union des disques de Gerschg\"orin de $A$ :
+  \begin{equation*}
+    A = \left( \begin{array}{cccc}
+      1+i & i & 2 \\
+      3 & 2+i & 1\\
+      1 & i   & 6
+    \end{array} \right).
+  \end{equation*}
+  \item On appelle matrice \`a diagonale strictement dominante, une
+    matrice telle que
+    \begin{equation*}
+      \forall i \quad \sum\limits_{k\neq i} |a_{ik}| < |a_{ii}|.
+    \end{equation*}
+    Démontrer, en utilisant les disques de Gerschg\"orin que toute matrice
+    à diagonale strictement dominante est inversible.
+  \end{enumerate}
+\end{exo}
+
+% =============
+\end{document}
+% =============

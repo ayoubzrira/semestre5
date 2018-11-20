@@ -1,0 +1,5 @@
+Bravo.
+
+Nous allons encore une fois utiliser ssh, mais cette fois-ci pour
+exécuter une commande à distance. La commande en question est
+l'exécutable etape-G2.sh, dans le même répertoire que ce fichier.

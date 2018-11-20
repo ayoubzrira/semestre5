@@ -1,0 +1,35 @@
+<svg width="1720.0" height="870.0">
+<rect width="1720.0" height="870.0" fill = "white"/>
+<circle cx="10.0" cy="10.0" r="8" fill="red"/>
+<text x="10.0" y="10.0">0</text>
+<circle cx="210.0" cy="210.0" r="8" fill="red"/>
+<text x="210.0" y="210.0">1</text>
+<circle cx="310.0" cy="310.0" r="8" fill="red"/>
+<text x="310.0" y="310.0">2</text>
+<circle cx="360.0" cy="310.0" r="8" fill="red"/>
+<text x="360.0" y="310.0">3</text>
+<circle cx="360.0" cy="360.0" r="8" fill="red"/>
+<text x="360.0" y="360.0">4</text>
+<circle cx="460.0" cy="460.0" r="8" fill="red"/>
+<text x="460.0" y="460.0">5</text>
+<circle cx="560.0" cy="560.0" r="8" fill="red"/>
+<text x="560.0" y="560.0">6</text>
+<circle cx="860.0" cy="860.0" r="8" fill="red"/>
+<text x="860.0" y="860.0">7</text>
+<circle cx="1160.0" cy="560.0" r="8" fill="red"/>
+<text x="1160.0" y="560.0">8</text>
+<circle cx="1260.0" cy="460.0" r="8" fill="red"/>
+<text x="1260.0" y="460.0">9</text>
+<circle cx="1360.0" cy="360.0" r="8" fill="red"/>
+<text x="1360.0" y="360.0">10</text>
+<circle cx="1360.0" cy="310.0" r="8" fill="red"/>
+<text x="1360.0" y="310.0">11</text>
+<circle cx="1410.0" cy="310.0" r="8" fill="red"/>
+<text x="1410.0" y="310.0">12</text>
+<circle cx="1510.0" cy="210.0" r="8" fill="red"/>
+<text x="1510.0" y="210.0">13</text>
+<circle cx="1710.0" cy="10.0" r="8" fill="red"/>
+<text x="1710.0" y="10.0">14</text>
+<circle cx="860.0" cy="10.0" r="8" fill="red"/>
+<text x="860.0" y="10.0">15</text>
+<line x1="10.0" y1="10.0" x2="210.0" y2="210.0"                     stroke="red" stroke-width="8"/><line x1="210.0" y1="210.0" x2="310.0" y2="310.0"                     stroke="red" stroke-width="8"/><line x1="310.0" y1="310.0" x2="360.0" y2="310.0"                     stroke="red" stroke-width="8"/><line x1="360.0" y1="310.0" x2="360.0" y2="360.0"                     stroke="red" stroke-width="8"/><line x1="360.0" y1="360.0" x2="460.0" y2="460.0"                     stroke="red" stroke-width="8"/><line x1="460.0" y1="460.0" x2="560.0" y2="560.0"                     stroke="red" stroke-width="8"/><line x1="560.0" y1="560.0" x2="860.0" y2="860.0"                     stroke="red" stroke-width="8"/><line x1="860.0" y1="860.0" x2="1160.0" y2="560.0"                     stroke="red" stroke-width="8"/><line x1="1160.0" y1="560.0" x2="1260.0" y2="460.0"                     stroke="red" stroke-width="8"/><line x1="1260.0" y1="460.0" x2="1360.0" y2="360.0"                     stroke="red" stroke-width="8"/><line x1="1360.0" y1="360.0" x2="1360.0" y2="310.0"                     stroke="red" stroke-width="8"/><line x1="1360.0" y1="310.0" x2="1410.0" y2="310.0"                     stroke="red" stroke-width="8"/><line x1="1410.0" y1="310.0" x2="1510.0" y2="210.0"                     stroke="red" stroke-width="8"/><line x1="1510.0" y1="210.0" x2="1710.0" y2="10.0"                     stroke="red" stroke-width="8"/><line x1="1710.0" y1="10.0" x2="860.0" y2="10.0"                     stroke="red" stroke-width="8"/><line x1="860.0" y1="10.0" x2="10.0" y2="10.0"                     stroke="red" stroke-width="8"/></svg>
